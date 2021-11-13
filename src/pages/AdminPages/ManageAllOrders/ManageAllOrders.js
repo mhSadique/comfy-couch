@@ -1,16 +1,16 @@
 
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
-import MyOrdersSingle from '../../../components/MyOrdersSingle/MyOrdersSingle';
 import { Typography, Container, Box } from '@mui/material';
 import ManageOrderSingle from '../../../components/ManageOrderSingle/ManageOrderSingle';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ManageAllOrders = () => {
     const [allOrders, setAllOrders] = useState([]);
     const { user } = useAuth();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/all-orders`)
+        fetch(`https://morning-harbor-64345.herokuapp.com/all-orders`)
             .then(res => res.json())
             .then(data => setAllOrders(data))
     }, []);
@@ -19,18 +19,10 @@ const ManageAllOrders = () => {
     return (
         <Container>
             {/*Text to show when there is no order  */}
-            {!allOrders.length && <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '80vh'
-                }}
-            >
-                <Typography variant="h4">
-                    Users have not made any orders yet.
-                </Typography>
-            </Box>}
+            {!allOrders.length &&
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <CircularProgress />
+                    </Box>}
             <Box
                 sx={{
                     mt: 5,

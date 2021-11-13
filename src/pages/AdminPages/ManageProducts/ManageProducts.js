@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import ManageProductSingle from '../../../components/ManageProductSingle/ManageProductSingle';
 import { Typography, Container, Box } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
     const { user } = useAuth();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/all-products`)
+        fetch(`https://morning-harbor-64345.herokuapp.com/all-products`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [user.email]);
@@ -20,18 +21,10 @@ const ManageProducts = () => {
     return (
         <Container>
             {/*Text to show when there is no products  */}
-            {!products.length && <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '80vh'
-                }}
-            >
-                <Typography variant="h4">
-                    There is no product.
-                </Typography>
-            </Box>}
+            {!products.length &&
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <CircularProgress />
+                </Box>}
 
             {products.length &&
                 <>
@@ -51,7 +44,7 @@ const ManageProducts = () => {
                         sx={{
                             mt: 5,
                             display: 'grid',
-                            gridTemplateColumns: { xs: '1fr', md: '1fr 1fr 1fr' }, 
+                            gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr' },
                             gap: '30px'
                         }}
                     >

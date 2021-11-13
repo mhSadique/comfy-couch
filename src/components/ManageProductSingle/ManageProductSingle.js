@@ -16,7 +16,7 @@ const ManageOrderSingle = ({product, setProducts}) => {
     const handleRemoveProduct = () => {
         const proceed = window.confirm('Are you sure you want to cancel the order?');
         if (proceed) {
-            fetch(`http://localhost:5000/remove-product/${_id}`, {
+            fetch(`https://morning-harbor-64345.herokuapp.com/remove-product/${_id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json'
@@ -25,7 +25,7 @@ const ManageOrderSingle = ({product, setProducts}) => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
-                    fetch(`http://localhost:5000/all-products`)
+                    fetch(`https://morning-harbor-64345.herokuapp.com/all-products`)
                         .then(res => res.json())
                         .then(data => setProducts(data))
                 })

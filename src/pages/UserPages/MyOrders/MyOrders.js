@@ -2,33 +2,27 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import MyOrdersSingle from '../../../components/MyOrdersSingle/MyOrdersSingle';
 import { Typography, Container, Box } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const MyOrders = () => {
     const [myOrders, setMyOrders] = useState([]);
     const { user } = useAuth();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/order-by-email/${user.email}`)
+        fetch(`https://morning-harbor-64345.herokuapp.com/order-by-email/${user.email}`)
             .then(res => res.json())
             .then(data => setMyOrders(data))
     }, [user.email]);
 
 
+    console.log(myOrders, 'from my orders');
     return (
         <Container>
             {/*Text to show when there is no order  */}
-            {!myOrders.length && <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '80vh'
-                }}
-            >
-                <Typography variant="h4">
-                    You have not made any order yet.
-                </Typography>
-            </Box>}
+            {!myOrders.length &&
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <CircularProgress />
+                </Box>}
 
             {myOrders.length &&
                 <>

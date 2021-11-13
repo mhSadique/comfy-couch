@@ -20,7 +20,7 @@ const ManageOrderSingle = ({
     const [orderedCouch, setOrderedCouch] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/ordered-couch-by-id/${productId}`)
+        fetch(`https://morning-harbor-64345.herokuapp.com/ordered-couch-by-id/${productId}`)
             .then(res => res.json())
             .then(data => setOrderedCouch(data))
     }, [productId]);
@@ -29,7 +29,7 @@ const ManageOrderSingle = ({
     const handleCancelOrder = () => {
         const proceed = window.confirm('Are you sure you want to cancel the order?');
         if (proceed) {
-            fetch(`http://localhost:5000/cancel-order/${orderId}`, {
+            fetch(`https://morning-harbor-64345.herokuapp.com/cancel-order/${orderId}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json'
@@ -38,7 +38,7 @@ const ManageOrderSingle = ({
                 .then(res => res.json())
                 .then(data => {
                     alert('Your order has been cancelled');
-                    fetch(`http://localhost:5000/all-orders`)
+                    fetch(`https://morning-harbor-64345.herokuapp.com/all-orders`)
                         .then(res => res.json())
                         .then(data => setAllOrders(data))
                 })
@@ -47,16 +47,16 @@ const ManageOrderSingle = ({
 
 
     const handleApproveOrder = () => {
-        fetch(`http://localhost:5000/approve-order/${orderId}`, {
+        fetch(`https://morning-harbor-64345.herokuapp.com/approve-order/${orderId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ status: 'approved' })
+            body: JSON.stringify({ status: 'shipped' })
         })
             .then(res => res.json())
             .then(data => {
-                fetch(`http://localhost:5000/all-orders`)
+                fetch(`https://morning-harbor-64345.herokuapp.com/all-orders`)
                     .then(res => res.json())
                     .then(data => setAllOrders(data))
             })
@@ -93,7 +93,7 @@ const ManageOrderSingle = ({
 
             </CardContent>
 
-            {(status === 'approved') && <Chip
+            {(status === 'shipped') && <Chip
                 size="small"
                 label={status}
                 sx={{
@@ -117,14 +117,14 @@ const ManageOrderSingle = ({
                     size="small"
                     variant="contained"
                     sx={{ backgroundColor: 'green' }}
-                >Approve</Button>
+                >Update to shipped</Button>
 
                 <Button
                     onClick={handleCancelOrder}
                     size="small"
                     variant="contained"
                     sx={{ backgroundColor: 'red' }}
-                >Cancel</Button>
+                >Cancel order</Button>
             </CardActions>
         </Card>
     );

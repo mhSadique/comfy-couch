@@ -1,10 +1,10 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyCXKOqDP-ZM2ecJuk3Epw_SZY7IixjFbOc",
-    authDomain: "ema-john-simple-59131.firebaseapp.com",
-    projectId: "ema-john-simple-59131",
-    storageBucket: "ema-john-simple-59131.appspot.com",
-    messagingSenderId: "1027521456394",
-    appId: "1:1027521456394:web:e52dda6c56f9017d6432f3"
-  };
+  apiKey: "AIzaSyB-dP7Bf36j9GKXKBrgcU4ypxLnCDzJNT0",
+  authDomain: "comfy-couch-a8e75.firebaseapp.com",
+  projectId: "comfy-couch-a8e75",
+  storageBucket: "comfy-couch-a8e75.appspot.com",
+  messagingSenderId: "62467760952",
+  appId: "1:62467760952:web:deddecb01b4663d87157cd"
+};
 
 export default firebaseConfig;

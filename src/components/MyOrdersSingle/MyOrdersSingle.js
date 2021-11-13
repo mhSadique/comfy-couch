@@ -11,7 +11,7 @@ const MyOrdersSingle = ({ productId, orderId, status, email, setMyOrders }) => {
     const [orderedCouch, setOrderedCouch] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/ordered-couch-by-id/${productId}`)
+        fetch(`https://morning-harbor-64345.herokuapp.com/ordered-couch-by-id/${productId}`)
             .then(res => res.json())
             .then(data => setOrderedCouch(data))
     }, [productId]);
@@ -21,19 +21,19 @@ const MyOrdersSingle = ({ productId, orderId, status, email, setMyOrders }) => {
         const proceed = window.confirm('Are you sure you want to cancel the order?');
 
         if (proceed) {
-            fetch(`http://localhost:5000/cancel-order/${orderId}`, {
-                method: 'DELETE',
-                headers: {
-                    'content-type': 'application/json'
-                }
+            fetch(`https://morning-harbor-64345.herokuapp.com/cancel-order/${orderId}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                alert('Your order has been cancelled');
+                fetch(`https://morning-harbor-64345.herokuapp.com/order-by-email/${email}`)
+                    .then(res => res.json())
+                    .then(data => setMyOrders(data))
             })
-                .then(res => res.json())
-                .then(data => {
-                    alert('Your order has been cancelled');
-                    fetch(`http://localhost:5000/order-by-email/${email}`)
-                        .then(res => res.json())
-                        .then(data => setMyOrders(data))
-                })
         }
     };
 
@@ -56,12 +56,12 @@ const MyOrdersSingle = ({ productId, orderId, status, email, setMyOrders }) => {
                 </Typography>
             </CardContent>
 
-            {(status === 'approved') && <Chip
+            {(status === 'shipped') && <Chip
                 size="small"
                 label={status}
                 sx={{
                     backgroundColor: 'green',
-                    color: 'white'
+                    color: 'white',
                 }}
             ></Chip>}
 
@@ -70,7 +70,7 @@ const MyOrdersSingle = ({ productId, orderId, status, email, setMyOrders }) => {
                 label={status}
                 sx={{
                     backgroundColor: 'red',
-                    color: 'white'
+                    color: 'white',
                 }}
             ></Chip>}
 

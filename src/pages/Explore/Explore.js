@@ -1,13 +1,14 @@
 import { Container, Paper, Box, Typography, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Product from '../../components/Product/Product';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Explore = () => {
 
     const [couches, setCouches] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/couches')
+        fetch('https://morning-harbor-64345.herokuapp.com/couches')
         .then(res => res.json())
         .then(data => {
             console.log(data);
@@ -28,6 +29,11 @@ const Explore = () => {
                 >
                     Couches &amp; Sofas
                 </Typography>
+
+                {!couches.length &&
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <CircularProgress />
+                    </Box>}
                 
                 <Box 
                     sx={{

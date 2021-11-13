@@ -20,6 +20,7 @@ import Explore from './pages/Explore/Explore';
 import ProductPurchaseConfirmation from './pages/ProductPurchaseConfirmation/ProductPurchaseConfirmation';
 import AuthProvider from './Contexts/AuthProvider';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Footer from './pages/Homepage/HomepageSections/Footer/Footer';
 
 function App() {
   return (
@@ -92,6 +93,7 @@ function App() {
 
 
           </Switch>
+          <Footer />
         </AuthProvider>
       </Router>
     </>

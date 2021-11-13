@@ -17,7 +17,7 @@ const ProductPurchaseConfirmation = () => {
     });
 
     const handlePurchaseConfirm = e => {
-        fetch('http://localhost:5000/save-order-details', {
+        fetch('https://morning-harbor-64345.herokuapp.com/save-order-details', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -40,7 +40,7 @@ const useFirebase = () => {
             role: 'user'
         };
 
-        fetch(`http://localhost:5000/save-user`, {
+        fetch(`https://morning-harbor-64345.herokuapp.com/save-user`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -91,7 +91,7 @@ const useFirebase = () => {
                 setUser(user);
                 setUserIsLoggedIn(true);
 
-                fetch(`http://localhost:5000/user-by-email/${email}`)
+                fetch(`https://morning-harbor-64345.herokuapp.com/user-by-email/${email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data[0].role) {
