@@ -18,6 +18,7 @@ async function run() {
         const couchesCollection = database.collection('product_couch');
         const ordersCollection = database.collection('comfy_couch_orders');
         const usersCollection = database.collection('comfy_couch_users');
+        const reviewsRatingsCollection = database.collection('comfy_couch_reviews_ratings');
 
         // GET api (get all the couches)
         app.get('/couches', async (req, res) => {
@@ -147,13 +148,33 @@ async function run() {
             }
         })
 
+        // POST API (save a single package provided by the admin)
+        app.post('/save-new-product', async(req, res) => {
+            const productDetails = req.body;
+            const result = await couchesCollection.insertOne(productDetails);
+            if (result.insertedId) {
+                res.json('Product stored in database.');
+            }
+        })
 
+        // POST api (save a review and reting from user)
+        app.post('/save-review-rating', async (req, res) => {
+            const reviewRating = req.body;
+            const result = await reviewsRatingsCollection.insertOne(reviewRating);
+            if (result.insertedId) {
+                res.json('Thanks for your review.');
+            }
+        })
 
-
-
+        // GET API (get all reviews and rating)
+        app.get('/reviews-ratings', async(req, res) => {
+            const cursor = reviewsRatingsCollection.find({});
+            const reviewsRatings = await cursor.toArray();
+            res.send(reviewsRatings);
+        })
 
         // test 
-        app.get('/', async (req, res) => {
+        app.get('/test', async (req, res) => {
             res.send('success')
         })
 
