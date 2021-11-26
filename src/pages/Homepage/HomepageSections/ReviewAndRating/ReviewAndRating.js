@@ -42,9 +42,7 @@ const ReviewAndRating = () => {
                     }}
                 >
                     {reviewsRatings.map((reviewRating, index) => {
-                        if (index <= 5) {
                             return <ReviewAndRatingSingle key={reviewRating._id} reviewRating={reviewRating}/>;
-                        }
                     })}
                 </Box>
             </Container>
